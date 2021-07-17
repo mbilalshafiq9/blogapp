@@ -1,0 +1,79 @@
+{% extends 'dashboard/dashboard.html' %}
+{% block right_content %}
+        <div class="col-md-9 p-3 col2">
+            <h3 class="pt-3">Update Your Profile</h3> <hr>
+                <!-- Dashboard Tab -->
+            <div class="box p-3 bg-light  " style="height:50rem">
+                <form method="POST" action="{% url 'dashboard/profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="blogtitle">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="{{user.username}}" placeholder="Username">
+                    </div>
+                    <div class="form-group col-md-6 ">
+                        <label for="">Email Id</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email'Id" value="{{user.email}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">First Name</label>
+                        <input type="text" class="form-control" id="f_name" name="first_name" value="{{user.first_name}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="">Last Name</label>
+                        <input type="text" class="form-control" id="l_name" name="last_name" value="{{user.last_name}}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="hidden" name="uid" id="" value={{user.id}}>
+                        <label for="exampleFormControlTextarea1">Password</label>
+                        <p class="bg-white p-1 border">Password is Hashed you can connot read it. While you can change your password.
+                            <a  data-toggle="modal" data-target="#exampleModal" href="">Click Here</a></p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="submit" class=" btn btn-success w-25 " placeholder="Save Changes" value="Save Changes">
+                    </div>
+                </div>
+                </form>
+            </div>
+           
+        </div>
+    </div>
+
+  <!--Pass Change Modal -->
+  <div class="modal fade mt-5" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="POST" action="{% url 'dashboard/change_pass' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="blogtitle">Old Password</label>
+                        <input type="text" class="form-control" id="old_pass" name="old_pass" >
+                    </div>
+                    <div class="form-group col-md-12 ">
+                        <label for="">New Password</label>
+                        <input type="email" class="form-control" name="new_pass" >
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="">Confirm Pass</label>
+                        <input type="text" class="form-control" id="f_name" name="confirm_pass">
+                    </div>
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endblock %}

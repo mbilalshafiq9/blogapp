@@ -1,0 +1,49 @@
+{% extends 'dashboard/dashboard.html' %}
+{% block right_content %}
+{% load static %}
+  <script src="https://cdn.tiny.cloud/1/ikvailo94gk8xdd5dkwiq3b4jsr7bvi4sj6lhv1dh8o7agu2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <div class="col-md-9 p-3 col2">
+            <h3 class="pt-3">Your Blogs </h3> <hr>
+                <!-- Dashboard Tab -->
+            <div class="box p-3 bg-light " style="height:50rem">
+             <div class="row ">
+            {% for blog in blogs %}
+            {% if blog.author.id == user.id %}
+            <div class="post col-md-4 bg-white  border">
+            <div class="post-thumbnail "><a href="/blogs/"><img src="../media/{{blog.image}}" alt="..." style="height:200px" class="w-100 img-fluid"></a></div>
+            <div class="post-details  ">
+              <div class="post-meta d-flex justify-content-between">
+                <div class="date">{{blog.timestamp}}</div>
+                <div class="category"><a href="#">{{blog.category}}</a></div>
+              </div><a href="/blogs/">
+                <h3 class="h4">{{blog.title}}</h3></a> <br>
+                <a href="edit_blog/{{blog.id}}" class="btn btn-sm btn-warning">Edit</a> <a href="delete_blog/{{blog.id}}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
+          </div>
+                {% endif %}
+            {% endfor %}
+            </div></div>
+        </div>
+    </div>
+</div>
+<script>
+
+tinymce.init({
+  selector: 'textarea#basic-example',
+  height: 500,
+  menubar: false,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table paste code help wordcount'
+  ],
+  toolbar: 'undo redo | formatselect | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | help',
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+});
+
+
+</script>
+    {% endblock %}

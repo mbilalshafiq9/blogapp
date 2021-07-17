@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block title %}
+Dashboard | Blog to Glob 
+{% endblock title %}
+{% block body %}
+ <style>
+ .custom-nav{
+     list-style:none;
+ }
+ .custom-nav >li >a{
+     color:#3f3f3f;
+ }
+ </style>
+<div class="container-fluid jumbotron mb-5">
+    <div class="row">
+         {% load static %}
+            <div class="col-md-3 bg-light">
+            <br> <br>
+                <div class="info text-center mt-3">
+                <img src="{% static 'images/avatar-1.jpg'%}" style=" border:3px solid gray; border-radius:50%;width:100px; height:100px" alt="">
+                <h4 class="mt-3"> {% if user.first_name %} {{user.first_name }} {{user.last_name}} {% else %}  User Name {% endif %}</h4>
+                <p> Sahiwal Pakistan</p>
+                <hr>
+                <ul class="text-left  custom-nav">
+                <li><a href="{% url 'dashboard' %}" class=" text-light-black fs-16 "><i class="fas fa-tachometer-alt "></i> Dashboard</a>  </li> <hr>
+                <li><a href="{% url 'dashboard/blogs' %}" class="active  text-light-black fs-16 "><i class="fas fa-heart"></i> My Blogs</a>  </li><hr>
+                <li><a href="{% url 'dashboard/add_blog' %}" class="  text-light-black fs-16"><i class="fas fa-key"></i> Write Blog</a>  </li><hr>
+                <li> <a href=" {% url 'dashboard/profile' %}" class=" text-light-black fs-16"><i class="fas fa-user"></i> Profile</a> </li><hr>
+            
+                <li class="mb-5"><a href="{% url 'logout' %}" class=" text-light-black fs-16 "><i class="fas fa-sign-out-alt"></i> Logout</a> </li>
+                </ul>
+                </div>
+            
+            </div>
+            {% block right_content %}{% endblock right_content %}
+        
+    </div>
+</div>
+    {% endblock %}

@@ -1,0 +1,82 @@
+
+{% extends 'layout.html' %}
+{% block title %}
+Blog to Glob
+{% endblock title %}
+{% block body %}
+<style>
+.login {
+  min-height: 95vh;
+}
+
+.bg-image {
+  background-image: url('https://images.unsplash.com/photo-1542435503-956c469947f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTgwOTN8MHwxfHNlYXJjaHw3fHx3cml0aW5nJTIwZGVza3xlbnwwfHx8fDE2MjQwODkwMjE&ixlib=rb-1.2.1&q=80&w=1080');
+  background-size: cover;
+  background-position: center center;
+}
+</style>
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+
+        <!-- The content half -->
+        <div class="col-md-6 bg-light">
+            <div class="login d-flex align-items-center pb-5">
+
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3 class="display-4">Login</h3>
+                            <p class="text-muted mb-4"><a class="text-info" href=""  data-toggle="modal" data-target="#exampleModal">Forgot Password?</a></p>
+                            <form method="POST" action="{% url 'login' %}">
+                                {% csrf_token %}
+                                <div class="form-group mb-3">
+                                    <input id="inputEmail" name="username" type="username" placeholder="Username" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm p-4">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input id="inputPassword" name="password" type="password" placeholder="Password" required="" class="form-control rounded-pill border-0 shadow-sm p-4 text-primary">
+                                </div>
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                    <label for="customCheck1" class="custom-control-label">Remember password</label>
+                                </div>
+                                <button type="submit" style="border-radius:30px !important"  class="btn btn-dark btn-block text-uppercase mb-2 py-3 rounded shadow-sm">Log in</button>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End -->
+
+            </div>
+        </div><!-- End -->
+
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade mt-5" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="forgot_password" method="post">
+            {% csrf_token %}
+            <label for="">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter Your Registered Email " id="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Send Mail</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endblock %}

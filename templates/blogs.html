@@ -1,0 +1,132 @@
+
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Blogs | Blog to Glob
+{% endblock title %}
+{% block body %}
+{% load humanize %}
+<div class="container">
+
+<ul class="breadcrumb bg-light">
+  <li><a href="/" class="text-info">Home  </a></li>&nbsp; /&nbsp;
+  <li>Blogs</li>
+</ul>
+      <div class="row">
+        <!-- Latest Posts -->
+        <main class="posts-listing col-lg-8"> 
+          <div class="container">
+            <div class="row">
+            {% for blog in blogs %}
+              <!-- post -->
+              <div class="post col-xl-6"> 
+                <div class="post-thumbnail"><a href="../blog/{{blog.id}}"><img src="../media/{{blog.image}}" style="height:220px" alt="..." class="img-fluid w-100"></a></div>
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    <div class="date meta-last"></div>
+                    <div class="category"><a href="#">{{blog.category}}</a></div>
+                  </div><a href="../blog/{{blog.id}}">
+                    <h3 class="h4">{{blog.title}}</h3></a>
+                  <p class="text-muted">Maiores facere ipsam aliquid at, aperiam eaque quaerat libero esse blanditiis voluptatibus voluptas fugit soluta impedit?</p>
+                  <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                      <div class="avatar"><img src="https://source.unsplash.com/random/140x140/?profile,picture,human,{{blog.id}}" alt="..." class="img-fluid"></div>
+                      <div class="title"><span>{{blog.author.first_name}} </span></div></a>
+                    <div class="date"><i class="fas fa-clock"></i> {{blog.timestamp|naturaltime}}</div>
+                    <div class="comments meta-last"><i class="fas fa-comment-dots"></i>{{blog.comment_count}}</div>
+                  </footer>
+                </div>
+              </div>
+             {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+             {% if blogs.has_other_pages %}
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+               {% if blogs.has_previous %}
+                <li class="page-item"><a href="?page={{ blogs.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                {% else %}
+                  <li class="page-item disabled"><a href="" class="page-link"> <i class="fa fa-angle-left"></i></a></li> {% endif %}
+                  {% for i in blogs.paginator.page_range %}
+                  {% if blogs.number == i %}
+                <li class="page-item"><a href="#" class="page-link active">{{ i }}</a></li>
+                 {% else %}
+                    <li class="page-item"><a class="page-link " href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if blogs.has_next %}
+                <li class="page-item"><a href="?page={{ blogs.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                 {% else %}
+                  <li class="disabled page-item"><a href="" class="page-link"><i class="fa fa-angle-right"></i></a></li>
+                {% endif %}
+              </ul>
+            </nav>
+            {% endif %}
+          </div>
+        </main>
+        <aside class="col-lg-4">
+          <!-- Widget [Search Bar Widget]-->
+          <div class="widget search">
+            <header>
+              <h3 class="h6">Search the blog</h3>
+            </header>
+            <form action="/search" method="get" class="search-form">
+              <div class="form-group">
+                <input type="search" name="query" id="query" placeholder="What are you looking for?">
+                <button type="submit" class="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+          <!-- Widget [Latest Posts Widget]        -->
+          <div class="widget latest-posts">
+            <header>
+              <h3 class="h6">Latest Posts</h3>
+            </header>
+            <div class="blog-posts">
+            {% for blog in blogs|slice:"3" %}
+                <a href="#">
+                <div class="item d-flex align-items-center">
+                  <div class="image"><img src="../media/{{blog.image}}" alt="..." class="img-fluid"></div>
+                  <div class="title"><strong>{{blog.title}}</strong>
+                    <div class="d-flex align-items-center">
+                      <div class="views"><i class="fas fa-eye"></i> 500</div>
+                      <div class="comments"><i class="fas fa-comment-dots"></i>12</div>
+                    </div>
+                  </div>
+                </div></a>
+                {% endfor %}
+                </div>
+          </div>
+          <!-- Widget [Categories Widget]-->
+          <div class="widget categories">
+            <header>
+              <h3 class="h6">Categories</h3>
+            </header>
+            {% for category in categories %}
+              <div class="item d-flex justify-content-between"><a href="#">{{category.title}}</a><span>{{category.posts_count}}</span></div>
+             {% endfor %} 
+                 
+                
+              
+                
+                  
+            
+          </div>
+          <!-- Widget [Tags Cloud Widget]-->
+          {% comment %} <div class="widget tags">       
+            <header>
+              <h3 class="h6">Tags</h3>
+            </header>
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#" class="tag">#Business</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Technology</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Fashion</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Sports</a></li>
+              <li class="list-inline-item"><a href="#" class="tag">#Economy</a></li>
+            </ul>
+          </div> {% endcomment %}
+        </aside>
+      </div>
+    </div>
+{% endblock body %}

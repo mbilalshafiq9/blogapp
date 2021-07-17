@@ -1,0 +1,69 @@
+
+{% extends 'layout.html' %}
+{% block title %}
+Register | Blog to Glob 
+{% endblock title %}
+{% block body %}
+<style>
+.login {
+  min-height: 95vh;
+}
+
+.bg-image {
+  background-image: url('https://images.unsplash.com/photo-1542435503-956c469947f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTgwOTN8MHwxfHNlYXJjaHw3fHx3cml0aW5nJTIwZGVza3xlbnwwfHx8fDE2MjQwODkwMjE&ixlib=rb-1.2.1&q=80&w=1080');
+  background-size: cover;
+  background-position: center center;
+}
+</style>
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+
+        <!-- The content half -->
+        <div class="col-md-6 bg-light">
+            <div class="login d-flex align-items-center pb-5">
+
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <h3 class="display-4">Register </h3>
+                            <p class="text-muted mb-4">Create a login split page using Bootstrap 4.</p>
+                            <form action="{% url 'register' %}" method="POST">
+                                {% csrf_token %}
+                            <div class="form-group mb-3">
+                                    <input id="inputusername" type="text" placeholder="Uique Username" name='username' required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm p-4">
+                                </div>
+                             <div class="form-group mb-5">
+                                    <input id="inputfname" type="text" placeholder="First Name" name='fname' required="" autofocus="" class="form-control float-left w-50 rounded-pill border-0 shadow-sm p-4">
+                               
+                                    <input id="inputlname" type="text" placeholder="Last Name" name='lname' required="" autofocus="" class="form-control  w-50 float-right rounded-pill border-0 shadow-sm p-4">
+                                </div> <br> <br>
+                                <div class="form-group mb-3">
+                                    <input id="inputEmail" type="email" placeholder="Email address" name='email' required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm p-4">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input id="inputPassword" type="password" placeholder="Password" name='pass1' required="" class="form-control rounded-pill border-0 shadow-sm p-4 text-primary">
+                                </div>
+                                 <div class="form-group mb-3">
+                                    <input id="inputPassword" type="password" placeholder="Password" name='pass2' required="" class="form-control rounded-pill border-0 shadow-sm p-4 text-primary">
+                                </div>
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                    <label for="customCheck1" class="custom-control-label">Remember password</label>
+                                </div>
+                                <button type="submit" style="border-radius:30px !important" class="btn btn-dark btn-block py-3 text-uppercase mb-2 rounded shadow-sm">Register Now</button>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End -->
+
+            </div>
+        </div><!-- End -->
+
+    </div>
+</div>
+    {% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'dashboard/dashboard.html' %}
+{% block right_content %}
+  <script src="https://cdn.tiny.cloud/1/ikvailo94gk8xdd5dkwiq3b4jsr7bvi4sj6lhv1dh8o7agu2/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <div class="col-md-9 p-3 col2">
+            <h3 class="pt-3">Add New Blog</h3> <hr>
+                <!-- Dashboard Tab -->
+            <div class="box p-3 bg-light  " style="height:50rem">
+                <form method="POST" action="{% url 'dashboard/add_blog' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="blogtitle">Blog Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Blog title goes here...">
+                    </div>
+                    <div class="form-group w-50 float-right">
+                        <label for="">Select Category</label>
+                        <select name="category" id="" class="form-control">
+                            {% for cat in category %}
+                            <option value="{{cat.id}}">{{cat.title}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group w-50 float-left">
+                        <input type="hidden" name="author" id="" value={{user.id}}>
+                        <label for="">Blog Images</label>
+                          <input type="file" name="image" class="form-control" id="image" placeholder="Upload blog image">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Blog Post</label>
+                        <textarea id="basic-example" name="content" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class=" btn btn-success w-25 " placeholder="Submit">
+                    </div>
+                </form>
+            </div>
+           
+        </div>
+    </div>
+</div>
+<script>
+
+tinymce.init({
+  selector: 'textarea#basic-example',
+  height: 500,
+  menubar: false,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table paste code help wordcount'
+  ],
+  toolbar: 'undo redo | formatselect | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | help',
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+});
+
+
+</script>
+    {% endblock %}
