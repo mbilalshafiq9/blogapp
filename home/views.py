@@ -49,7 +49,7 @@ def reset_pass(request):
 
 # Blog Page
 def blog(request):
-    blog_list=Blog.objects.filter().annotate(comment_count=Count('blog'))
+    blog_list=Blog.objects.filter().annotate(comment_count=Count('blog')).order_by('-id')
     categories = Category.objects.all().annotate(posts_count=Count('cat'))
     #Pagination
     page = request.GET.get('page', 1)
